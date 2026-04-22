@@ -1073,45 +1073,380 @@
       transform: translateY(0);
     }
 
+    /* ── SCROLL PROGRESS BAR ── */
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: var(--gradient-text);
+      z-index: 10001;
+      width: 0%;
+      border-radius: 0 2px 2px 0;
+      box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+
+    /* ── DARK MODE ── */
+    body.dark-mode {
+      --bg-color: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.6);
+      --bg-card-hover: rgba(30, 41, 59, 0.9);
+      --card-border: rgba(100, 116, 139, 0.3);
+      --accent: #4ade80;
+      --accent-light: #86efac;
+      --gradient-text: linear-gradient(90deg, #4ade80, #22d3ee, #34d399);
+      --text-main: #f1f5f9;
+      --muted: #94a3b8;
+      --sub: #cbd5e1;
+    }
+
+    body.dark-mode #loader { background: #0f172a; }
+    body.dark-mode nav { background: rgba(15, 23, 42, 0.8); }
+    body.dark-mode .ticker { background: rgba(30, 41, 59, 0.5); border-color: rgba(100, 116, 139, 0.3); }
+    body.dark-mode footer { background: rgba(30, 41, 59, 0.6); border-color: rgba(100, 116, 139, 0.3); }
+    body.dark-mode .orb-1 { background: #065f46; }
+    body.dark-mode .orb-2 { background: #064e3b; }
+    body.dark-mode .orb-3 { background: #047857; }
+
+    .dark-toggle {
+      background: var(--bg-card);
+      border: 2px solid var(--card-border);
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .dark-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* ── HAMBURGER MENU ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 28px;
+      height: 3px;
+      background: var(--text-main);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+    /* ── SERVICES / WHAT I DO ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      padding: 40px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-text);
+      border-radius: 0 0 4px 4px;
+      transition: width 0.3s ease;
+    }
+
+    .service-card:hover::before { width: 100%; }
+
+    .service-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ── BLOG / INSIGHTS ── */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .blog-card {
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .blog-img {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, rgba(27,94,32,0.15), rgba(0,150,136,0.15));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      position: relative;
+    }
+
+    .blog-body {
+      padding: 28px 24px;
+    }
+
+    .blog-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .blog-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      line-height: 1.2;
+      letter-spacing: 1px;
+    }
+
+    .blog-excerpt {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .blog-readmore {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .blog-readmore:hover { gap: 12px; }
+
+    /* ── RESPONSIVE ── */
     @media(max-width:900px) {
-
-      .intern-grid,
-      .skills-wrap {
-        grid-template-columns: 1fr;
-      }
-
-      .work-bullets {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-wrap {
-        grid-template-columns: 1fr;
-      }
-
+      .intern-grid, .skills-wrap { grid-template-columns: 1fr; }
+      .work-bullets { grid-template-columns: 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .blog-grid { grid-template-columns: 1fr; }
+      .hamburger { display: flex; }
       .nav-links {
         display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 30px 6%;
+        gap: 20px;
+        border-bottom: 1px solid var(--card-border);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       }
+      .nav-links.open { display: flex; }
+      body.dark-mode .nav-links { background: rgba(15,23,42,0.95); }
+      .big-name { font-size: 18vw; }
+      .proj-item { grid-template-columns: 1fr; }
+      .proj-arrow { display: none; }
+      .hero-side { text-align: left; }
+    }
 
-      .big-name {
-        font-size: 18vw;
-      }
+    @media(max-width:500px) {
+      .services-grid { grid-template-columns: 1fr; }
+    }
 
-      .proj-item {
-        grid-template-columns: 1fr;
-      }
+    /* ── ARTICLE MODAL ── */
+    .article-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      z-index: 8000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
 
-      .proj-arrow {
-        display: none;
-      }
+    .article-modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
 
-      .hero-side {
-        text-align: left;
-      }
+    .article-modal {
+      background: var(--bg-color);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 50px;
+      position: relative;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+      animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalSlideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .modal-close:hover {
+      background: rgba(0,0,0,0.1);
+      color: var(--text-main);
+    }
+
+    .modal-tag {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      color: var(--text-main);
+      line-height: 1.1;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+    }
+
+    .modal-content p {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--sub);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    .modal-content h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      color: var(--text-main);
+      letter-spacing: 1px;
+      margin: 32px 0 16px;
+    }
+
+    .modal-content ul {
+      list-style: none;
+      margin-bottom: 20px;
+    }
+
+    .modal-content ul li {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--sub);
+      padding: 8px 0 8px 24px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .modal-content ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .modal-content .highlight-box {
+      background: rgba(27,94,32,0.08);
+      border-left: 4px solid var(--accent);
+      padding: 20px 24px;
+      border-radius: 0 12px 12px 0;
+      margin: 24px 0;
+    }
+
+    .modal-content .highlight-box p {
+      margin-bottom: 0;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    @media(max-width:600px) {
+      .article-modal-overlay { padding: 16px; }
+      .article-modal { padding: 30px 24px; }
     }
   </style>
 </head>
 
 <body>
+
+  <div id="scroll-progress"></div>
 
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
@@ -1129,14 +1464,22 @@
 
   <nav>
     <div class="logo">H·P</div>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#services">Services</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#internships">Internships</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#insights">Insights</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
   <section class="hero">
@@ -1189,6 +1532,33 @@
       <span>GGRC Processing</span><span>·</span>
     </div>
   </div>
+
+  <section class="section reveal" id="services">
+    <div class="sec-num">00 — What I Do</div>
+    <h2>My Services</h2>
+    <div class="services-grid">
+      <div class="service-card glass-card interactive-3d">
+        <span class="service-icon">🌱</span>
+        <div class="service-title">Drip Irrigation Design</div>
+        <p class="service-desc">End-to-end design of micro-irrigation systems tailored to crop type, soil conditions, and field topography for maximum water efficiency.</p>
+      </div>
+      <div class="service-card glass-card interactive-3d">
+        <span class="service-icon">📐</span>
+        <div class="service-title">AutoCAD Layouts</div>
+        <p class="service-desc">Precise 2D layout drawings for irrigation systems, field planning, and technical proposals using AutoCAD.</p>
+      </div>
+      <div class="service-card glass-card interactive-3d">
+        <span class="service-icon">🛰️</span>
+        <div class="service-title">Remote Sensing &amp; GIS</div>
+        <p class="service-desc">Satellite imagery analysis, NDVI mapping, and land use classification using Google Earth Engine for data-driven agricultural decisions.</p>
+      </div>
+      <div class="service-card glass-card interactive-3d">
+        <span class="service-icon">📊</span>
+        <div class="service-title">GGRC &amp; Subsidy Processing</div>
+        <p class="service-desc">Complete assistance with government subsidy documentation, GGRC processing, and BOM preparation for irrigation projects.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="section reveal" id="education">
     <div class="sec-num">01 — Educational Background</div>
@@ -1435,6 +1805,171 @@
     </div>
   </section>
 
+  <section class="section reveal" id="insights">
+    <div class="sec-num">05.5 — Knowledge Sharing</div>
+    <h2>Insights &amp; Articles</h2>
+    <div class="blog-grid">
+      <div class="blog-card glass-card interactive-3d" data-article="article-1">
+        <div class="blog-img">💧</div>
+        <div class="blog-body">
+          <span class="blog-tag">Irrigation</span>
+          <div class="blog-title">How Drip Irrigation Saves 60% Water</div>
+          <p class="blog-excerpt">Drip irrigation delivers water directly to the root zone, minimizing evaporation and runoff. Learn how modern micro-irrigation technology is transforming Indian agriculture.</p>
+          <span class="blog-readmore">Read More →</span>
+        </div>
+      </div>
+      <div class="blog-card glass-card interactive-3d" data-article="article-2">
+        <div class="blog-img">🛰️</div>
+        <div class="blog-body">
+          <span class="blog-tag">Remote Sensing</span>
+          <div class="blog-title">Understanding NDVI Maps for Crop Health</div>
+          <p class="blog-excerpt">NDVI (Normalized Difference Vegetation Index) helps monitor crop vigor from space. Discover how satellite data can reveal plant stress before it's visible to the eye.</p>
+          <span class="blog-readmore">Read More →</span>
+        </div>
+      </div>
+      <div class="blog-card glass-card interactive-3d" data-article="article-3">
+        <div class="blog-img">🌾</div>
+        <div class="blog-body">
+          <span class="blog-tag">Agriculture</span>
+          <div class="blog-title">The Future of Precision Agriculture in India</div>
+          <p class="blog-excerpt">From drone spraying to AI-powered soil analysis, precision agriculture is reshaping farming in India. Here's what every agricultural engineer should know.</p>
+          <span class="blog-readmore">Read More →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICLE MODAL -->
+  <div class="article-modal-overlay" id="article-modal-overlay">
+    <div class="article-modal">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- HIDDEN FULL ARTICLES -->
+  <div style="display:none;">
+    <div id="article-1">
+      <span class="modal-tag">Irrigation</span>
+      <div class="modal-title">How Drip Irrigation Saves 60% Water</div>
+      <div class="modal-content">
+        <p>India is the world's largest user of groundwater, accounting for nearly 25% of the global total. With agriculture consuming over 80% of India's freshwater resources, the way we irrigate our fields has a direct impact on the nation's water security. Traditional flood irrigation methods waste up to 60–70% of water through evaporation, runoff, and deep percolation. This is where drip irrigation emerges as a game-changer.</p>
+
+        <h3>What is Drip Irrigation?</h3>
+        <p>Drip irrigation is a micro-irrigation method that delivers water directly to the root zone of plants through a network of pipes, valves, tubing, and emitters. Instead of flooding an entire field, water is applied slowly and precisely — drop by drop — exactly where the plant needs it.</p>
+
+        <h3>How Does It Save 60% Water?</h3>
+        <ul>
+          <li><strong>Targeted Delivery:</strong> Water reaches only the root zone, not the entire field surface. This eliminates wasteful surface runoff.</li>
+          <li><strong>Reduced Evaporation:</strong> Since water is applied at or below the soil surface, evaporation losses are minimized compared to sprinkler or flood irrigation.</li>
+          <li><strong>Controlled Flow Rate:</strong> Emitters deliver water at a precise rate (typically 1–8 liters per hour), preventing over-irrigation and deep percolation losses.</li>
+          <li><strong>Soil Moisture Optimization:</strong> The soil maintains optimal moisture levels without becoming waterlogged, which also improves plant health and reduces disease.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p>💡 Studies by ICAR show that drip irrigation can improve crop yields by 20–50% while reducing water usage by 40–60% compared to conventional flood irrigation.</p>
+        </div>
+
+        <h3>Real-World Impact in India</h3>
+        <p>Gujarat's GGRC (Gujarat Green Revolution Company) has been at the forefront of promoting micro-irrigation through government subsidies. Farmers in regions like Vadodara, Anand, and Panchmahal have seen dramatic improvements in both water savings and crop productivity after adopting drip systems.</p>
+        <p>Companies like Jain Irrigation Systems and Netafim have played a pivotal role in making drip technology accessible and affordable to Indian farmers. With government subsidies covering 50–80% of the installation cost, the adoption rate continues to rise year after year.</p>
+
+        <h3>Key Components of a Drip System</h3>
+        <ul>
+          <li><strong>Pump &amp; Head Unit:</strong> Filters, pressure regulators, and fertigation equipment</li>
+          <li><strong>Main &amp; Sub-Main Lines:</strong> PVC/HDPE pipes carrying water from the source</li>
+          <li><strong>Laterals:</strong> Thin polyethylene tubes running along crop rows</li>
+          <li><strong>Emitters/Drippers:</strong> Devices that release water at a controlled rate</li>
+        </ul>
+
+        <h3>The Bottom Line</h3>
+        <p>Drip irrigation is not just a water-saving technology — it is a complete shift in how we think about agricultural water management. As water scarcity intensifies across India, adopting drip irrigation is no longer optional; it is a necessity for sustainable agriculture.</p>
+      </div>
+    </div>
+
+    <div id="article-2">
+      <span class="modal-tag">Remote Sensing</span>
+      <div class="modal-title">Understanding NDVI Maps for Crop Health</div>
+      <div class="modal-content">
+        <p>Imagine being able to assess the health of thousands of hectares of farmland without physically visiting a single field. This is the power of NDVI (Normalized Difference Vegetation Index) — a remote sensing technique that has revolutionized modern agriculture by making crop health monitoring fast, accurate, and scalable.</p>
+
+        <h3>What is NDVI?</h3>
+        <p>NDVI is a numerical indicator that uses the visible red and near-infrared (NIR) bands of the electromagnetic spectrum to measure vegetation health. Healthy green plants absorb most of the visible red light for photosynthesis and reflect a large portion of near-infrared light. Stressed, diseased, or dead vegetation shows the opposite pattern.</p>
+
+        <div class="highlight-box">
+          <p>📊 NDVI = (NIR - Red) / (NIR + Red). Values range from -1 to +1. Healthy vegetation typically scores between 0.3 and 0.8, while bare soil and water score near 0 or negative.</p>
+        </div>
+
+        <h3>How NDVI Maps Are Created</h3>
+        <ul>
+          <li><strong>Satellite Data:</strong> Platforms like Sentinel-2 (ESA) and Landsat (NASA) capture multispectral imagery of the Earth's surface every 5–16 days.</li>
+          <li><strong>Processing:</strong> Using tools like Google Earth Engine, the red and NIR bands are extracted and the NDVI formula is applied to every pixel.</li>
+          <li><strong>Visualization:</strong> The resulting NDVI values are mapped using a color gradient — from red/brown (low vegetation/stress) to dark green (dense, healthy vegetation).</li>
+        </ul>
+
+        <h3>Applications in Agriculture</h3>
+        <ul>
+          <li><strong>Early Stress Detection:</strong> NDVI can reveal crop stress 1–2 weeks before it becomes visible to the naked eye, allowing timely intervention.</li>
+          <li><strong>Irrigation Management:</strong> By identifying areas with low NDVI values, farmers can target irrigation to water-stressed zones instead of irrigating uniformly.</li>
+          <li><strong>Yield Estimation:</strong> NDVI values during the growing season strongly correlate with final crop yield, enabling pre-harvest yield predictions.</li>
+          <li><strong>Crop Acreage Estimation:</strong> Government agencies use NDVI to map and estimate the area under different crops for planning and policy purposes.</li>
+        </ul>
+
+        <h3>My Experience with NDVI</h3>
+        <p>During my B.Tech major project at Anand Agricultural University, I used Google Earth Engine to create NDVI maps for the Panchmahal district of Gujarat during the 2023–24 Rabi season. By applying supervised classification using the Random Forest algorithm on Sentinel-2 imagery, I was able to accurately classify land use patterns and estimate crop acreage across the region.</p>
+        <p>The results demonstrated how satellite-based monitoring can provide actionable insights to farmers and agricultural departments without the need for expensive ground surveys.</p>
+
+        <h3>The Future of NDVI</h3>
+        <p>With the increasing availability of high-resolution satellite data and drone-based multispectral cameras, NDVI mapping is becoming more precise and accessible than ever. Combining NDVI with AI and machine learning is opening new frontiers in precision agriculture, enabling real-time, field-level decision-making for millions of farmers.</p>
+      </div>
+    </div>
+
+    <div id="article-3">
+      <span class="modal-tag">Agriculture</span>
+      <div class="modal-title">The Future of Precision Agriculture in India</div>
+      <div class="modal-content">
+        <p>Agriculture in India is undergoing a quiet revolution. While traditional farming practices still dominate much of rural India, a new wave of technology-driven solutions is beginning to reshape how we grow food. This transformation — known as precision agriculture — promises to make farming more efficient, sustainable, and profitable.</p>
+
+        <h3>What is Precision Agriculture?</h3>
+        <p>Precision agriculture (PA) is a farming management approach that uses information technology, satellite data, IoT sensors, and data analytics to observe, measure, and respond to variability in crops and fields. Instead of treating an entire farm uniformly, PA recognizes that every part of a field has different needs — and addresses them individually.</p>
+
+        <h3>Key Technologies Driving the Change</h3>
+        <ul>
+          <li><strong>Drones &amp; UAVs:</strong> Agricultural drones are being used for crop spraying, field mapping, and health monitoring. A single drone can cover 10–15 acres per hour, replacing manual labor that would take an entire day.</li>
+          <li><strong>IoT Soil Sensors:</strong> Wireless sensors placed in the field continuously monitor soil moisture, temperature, pH, and nutrient levels. This data is transmitted to the farmer's smartphone in real-time.</li>
+          <li><strong>Satellite Remote Sensing:</strong> Platforms like Google Earth Engine provide free access to satellite imagery for monitoring crop health (NDVI), estimating yields, and detecting pest infestations over large areas.</li>
+          <li><strong>AI &amp; Machine Learning:</strong> Algorithms can now predict crop diseases, recommend optimal planting dates, and even forecast market prices — helping farmers make smarter decisions.</li>
+          <li><strong>Variable Rate Technology (VRT):</strong> Instead of applying the same amount of fertilizer or water everywhere, VRT adjusts the application rate based on the specific needs of each zone in the field.</li>
+        </ul>
+
+        <div class="highlight-box">
+          <p>🌾 According to NABARD, precision agriculture can reduce input costs by 15–20% while increasing yields by 10–30%, making it a win-win for both farmers and the environment.</p>
+        </div>
+
+        <h3>Challenges in Indian Context</h3>
+        <p>Despite its promise, precision agriculture faces several hurdles in India:</p>
+        <ul>
+          <li><strong>Small Landholdings:</strong> The average farm size in India is just 1.08 hectares, making it difficult to justify the cost of advanced equipment.</li>
+          <li><strong>Digital Literacy:</strong> Many farmers lack the technical skills to use apps, sensors, and data-driven tools effectively.</li>
+          <li><strong>Infrastructure Gaps:</strong> Reliable internet connectivity and electricity supply remain challenges in rural areas.</li>
+          <li><strong>High Initial Costs:</strong> While long-term ROI is positive, the upfront investment in drones, sensors, and software can be prohibitive for small farmers.</li>
+        </ul>
+
+        <h3>The Road Ahead</h3>
+        <p>The Indian government's push toward Digital Agriculture through initiatives like the Agri Stack, PM-KISAN, and state-level subsidy programs (like Gujarat's GGRC) is creating a supportive ecosystem for technology adoption. Startups and companies in the agritech space are developing affordable, localized solutions tailored to Indian conditions.</p>
+        <p>As an agricultural engineer working in the irrigation industry, I believe that the convergence of remote sensing, IoT, and AI will fundamentally transform Indian agriculture within the next decade. The farmers who embrace these technologies early will not only survive but thrive in an era of climate uncertainty and resource scarcity.</p>
+
+        <h3>What Every Ag Engineer Should Do</h3>
+        <ul>
+          <li>Learn Google Earth Engine and basic GIS tools</li>
+          <li>Understand how drone technology applies to crop management</li>
+          <li>Stay updated on government subsidy schemes for micro-irrigation and precision tools</li>
+          <li>Bridge the gap between technology and farmers through field-level training</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <section class="section reveal" id="contact">
     <div class="sec-num">06 — Get In Touch</div>
     <div class="contact-wrap">
@@ -1562,6 +2097,78 @@
         // Snap back to flat when mouse leaves
         card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
         card.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+      });
+    });
+    // ── ARTICLE MODAL ──
+    const modalOverlay = document.getElementById('article-modal-overlay');
+    const modalBody = document.getElementById('modal-body');
+    const modalClose = document.getElementById('modal-close');
+
+    document.querySelectorAll('.blog-card[data-article]').forEach(card => {
+      card.addEventListener('click', () => {
+        const articleId = card.getAttribute('data-article');
+        const articleContent = document.getElementById(articleId);
+        if (articleContent) {
+          modalBody.innerHTML = articleContent.innerHTML;
+          modalOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // ── SCROLL PROGRESS BAR ──
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = (scrollTop / scrollHeight) * 100;
+      progressBar.style.width = scrollPercent + '%';
+    });
+
+    // ── DARK MODE TOGGLE ──
+    const darkToggle = document.getElementById('dark-toggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      darkToggle.textContent = '☀️';
+    }
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      darkToggle.textContent = isDark ? '☀️' : '🌙';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // ── HAMBURGER MENU ──
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('open');
       });
     });
   </script>
