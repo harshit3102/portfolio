@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harshit Patel — Agricultural Engineer</title>
+<meta name="description" content="Harshit Patel — Agricultural Engineer specializing in drip irrigation design, GIS &amp; remote sensing, and data-driven decision-making.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0D0D0B;
+    --panel:#16160f;
+    --panel-line:#2a2a22;
+    --text:#F1F0E8;
+    --muted:#9A988C;
+    --muted-2:#6f6e64;
+    --accent:#C8F545;
+    --accent-dim:#8FA83A;
+    --ndvi-1:#8B4A2B;
+    --ndvi-2:#C9A227;
+    --ndvi-3:#8FBF3F;
+    --ndvi-4:#2E7D32;
+    --maxw:920px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Public Sans', -apple-system, sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  .ndvi-bar{
+    height:3px;
+    width:100%;
+    background:linear-gradient(90deg, var(--ndvi-1), var(--ndvi-2), var(--ndvi-3), var(--ndvi-4));
+    border-radius:2px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(13,13,11,0.85);
+    border-bottom:1px solid var(--panel-line);
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:0.02em;
+  }
+  .logo span{color:var(--accent);}
+  .nav-links{
+    display:flex;
+    gap:28px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .nav-links a{text-decoration:none; transition:color .2s;}
+  .nav-links a:hover{color:var(--text);}
+  @media (max-width:640px){ .nav-links{display:none;} }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 64px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(40px, 7vw, 68px);
+    font-weight:700;
+    line-height:1.02;
+  }
+  .hero .role{
+    margin-top:18px;
+    font-size:clamp(17px,2.4vw,20px);
+    color:var(--muted);
+    max-width:540px;
+  }
+  .hero .role strong{color:var(--text); font-weight:600;}
+
+  .hero-bar{
+    margin:32px 0 28px;
+    max-width:280px;
+  }
+
+  .cta-row{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:8px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 20px;
+    border-radius:100px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    transition:transform .15s, background .15s, border-color .15s;
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#0D0D0B;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{
+    border:1px solid var(--panel-line);
+    color:var(--text);
+  }
+  .btn-ghost:hover{border-color:var(--muted); transform:translateY(-2px);}
+
+  .stat-line{
+    margin-top:44px;
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    color:var(--muted);
+    font-size:14px;
+  }
+  .stat-line .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:26px;
+    font-weight:700;
+    color:var(--accent);
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:64px 0;}
+  .section-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:36px;
+  }
+  .section-head .idx{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--muted-2);
+  }
+  .section-head h2{
+    font-size:22px;
+    font-weight:600;
+  }
+  .section-head::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--panel-line);
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ---------- FOCUS ---------- */
+  .focus-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--panel-line);
+    border:1px solid var(--panel-line);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .focus-item{
+    background:var(--panel);
+    padding:22px 18px;
+  }
+  .focus-item .f-label{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    margin-bottom:8px;
+  }
+  .focus-item .f-desc{
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.5;
+  }
+  @media (max-width:760px){
+    .focus-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:460px){
+    .focus-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{
+    position:relative;
+    padding-left:28px;
+    border-left:1px solid var(--panel-line);
+  }
+  .t-item{
+    position:relative;
+    padding-bottom:34px;
+  }
+  .t-item:last-child{padding-bottom:0;}
+  .t-item::before{
+    content:"";
+    position:absolute;
+    left:-33px;
+    top:4px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--accent);
+  }
+  .t-date{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--muted-2);
+    margin-bottom:6px;
+  }
+  .t-role{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:17px;
+    font-weight:600;
+  }
+  .t-org{
+    font-size:14px;
+    color:var(--muted);
+    margin-top:2px;
+  }
+  .t-desc{
+    font-size:14px;
+    color:var(--muted);
+    margin-top:8px;
+    max-width:560px;
+  }
+  .badge{
+    display:inline-block;
+    margin-top:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--accent);
+    border:1px solid var(--accent-dim);
+    padding:4px 10px;
+    border-radius:100px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:700px){ .proj-grid{grid-template-columns:1fr;} }
+  .proj-card{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:14px;
+    padding:26px;
+    transition:border-color .2s;
+  }
+  .proj-card:hover{border-color:var(--accent-dim);}
+  .proj-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--muted-2);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .proj-card h3{
+    font-size:18px;
+    margin-top:10px;
+    margin-bottom:10px;
+    line-height:1.3;
+  }
+  .proj-card p{
+    font-size:14px;
+    color:var(--muted);
+    margin:0 0 14px;
+  }
+  .chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--text);
+    background:#1f1f16;
+    border:1px solid var(--panel-line);
+    padding:4px 9px;
+    border-radius:6px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-row{
+    display:flex;
+    gap:24px;
+    padding:18px 0;
+    border-bottom:1px solid var(--panel-line);
+    flex-wrap:wrap;
+  }
+  .skill-row:first-of-type{border-top:1px solid var(--panel-line);}
+  .skill-cat{
+    width:190px;
+    flex-shrink:0;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--accent);
+  }
+  .skill-items{
+    flex:1;
+    min-width:220px;
+    color:var(--muted);
+    font-size:14px;
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-item{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid var(--panel-line);
+    font-size:14.5px;
+    flex-wrap:wrap;
+  }
+  .edu-item:last-child{border-bottom:none;}
+  .edu-item .edu-name{font-weight:600;}
+  .edu-item .edu-school{color:var(--muted); font-size:13.5px; margin-top:2px;}
+  .edu-item .edu-date{
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--muted-2);
+    font-size:13px;
+    white-space:nowrap;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-box{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:16px;
+    padding:44px 36px;
+    text-align:center;
+  }
+  .contact-box h2{
+    font-size:30px;
+    margin-bottom:10px;
+  }
+  .contact-box p{
+    color:var(--muted);
+    font-size:15px;
+    margin-bottom:26px;
+  }
+  .contact-links{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  footer{
+    padding:36px 0 48px;
+    text-align:center;
+    font-size:12.5px;
+    color:var(--muted-2);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  footer .loc{margin-bottom:6px; color:var(--muted);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">H<span>·</span>P</div>
+    <div class="nav-links">
+      <a href="#work">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap hero">
+  <div class="eyebrow">Agricultural Engineer</div>
+  <h1>Harshit Patel</h1>
+  <p class="role">Designing <strong>drip irrigation systems</strong> and reading <strong>satellite &amp; sales data</strong> to help farmers and businesses make better decisions.</p>
+
+  <div class="hero-bar ndvi-bar"></div>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="mailto:harshitpatel3102@gmail.com">Email me</a>
+    <a class="btn btn-ghost" href="https://linkedin.com/in/harshit-patel-agri" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="btn btn-ghost" href="tel:+918140593242">Call</a>
+  </div>
+
+  <div class="stat-line">
+    <span class="num">2nd</span>
+    <span>Sales rank, all fresher hires — Rising Star Award, Jain Irrigation Systems, 2025</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <section id="focus">
+    <div class="section-head reveal">
+      <span class="idx">01</span>
+      <h2>What I work on</h2>
+    </div>
+    <div class="focus-grid reveal">
+      <div class="focus-item">
+        <div class="f-label">Drip Irrigation Design</div>
+        <div class="f-desc">Systems matched to crop, soil, and field topography.</div>
+      </div>
+      <div class="focus-item">
+        <div class="f-label">AutoCAD Layouts</div>
+        <div class="f-desc">Technical drawings for field planning and proposals.</div>
+      </div>
+      <div class="focus-item">
+        <div class="f-label">GIS &amp; Remote Sensing</div>
+        <div class="f-desc">Satellite imagery and land-use analysis with Google Earth Engine.</div>
+      </div>
+      <div class="focus-item">
+        <div class="f-label">Power BI &amp; Data</div>
+        <div class="f-desc">Dashboards and data cleaning for clearer business decisions.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-head reveal">
+      <span class="idx">02</span>
+      <h2>Where I've worked</h2>
+    </div>
+    <div class="timeline reveal">
+      <div class="t-item">
+        <div class="t-date">Jun 2025 — Present</div>
+        <div class="t-role">Sales Engineer</div>
+        <div class="t-org">Jain Irrigation Systems Ltd. · Vadodara</div>
+        <div class="t-desc">Design drip irrigation systems, prepare AutoCAD layouts and BOMs, and coordinate GGRC subsidy processing with dealers and farmers.</div>
+        <div class="badge">★ Rising Star Award 2025</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">Sep 2024 — Jun 2025</div>
+        <div class="t-role">Customer Support Associate</div>
+        <div class="t-org">Concentrix Services India Pvt. Ltd. · Vadodara</div>
+        <div class="t-desc">High-volume phone support with strong first-call resolution and consistent KPI performance.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">Aug — Nov 2023</div>
+        <div class="t-role">Intern, Micro Irrigation Systems</div>
+        <div class="t-org">Netafim Irrigation India Pvt. Ltd.</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">Jun 2023</div>
+        <div class="t-role">Intern, Agricultural Engineering &amp; Technologies</div>
+        <div class="t-org">Central Institute of Agricultural Engineering, Bhopal</div>
+      </div>
+      <div class="t-item">
+        <div class="t-date">May 2022</div>
+        <div class="t-role">Intern, Farm Machinery &amp; Operations</div>
+        <div class="t-org">Central Farm Machinery Training and Testing Institute, Budni</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-head reveal">
+      <span class="idx">03</span>
+      <h2>Selected projects</h2>
+    </div>
+    <div class="proj-grid reveal">
+      <div class="proj-card">
+        <div class="proj-tag">Major Project · IDE Dept.</div>
+        <h3>Land Use &amp; Land Cover Mapping Using Remote Sensing &amp; GIS</h3>
+        <p>Studied the Panchmahal region of Middle Gujarat through the 2023–24 Rabi season, using Random Forest classification on Sentinel-2 imagery for land-use and crop acreage estimation.</p>
+        <div class="chip-row">
+          <span class="chip">Google Earth Engine</span>
+          <span class="chip">Random Forest</span>
+          <span class="chip">Sentinel-2</span>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-tag">Self-Initiated · 2026</div>
+        <h3>S&amp;OP Power BI Dashboard Suite</h3>
+        <p>A 21-dashboard suite for a drip irrigation manufacturer covering forecasting, inventory, and sales — with custom DAX measures and drill-through to SKU-level detail.</p>
+        <div class="chip-row">
+          <span class="chip">Power BI</span>
+          <span class="chip">DAX</span>
+          <span class="chip">Power Query</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head reveal">
+      <span class="idx">04</span>
+      <h2>Skills</h2>
+    </div>
+    <div class="reveal">
+      <div class="skill-row">
+        <div class="skill-cat">Technical</div>
+        <div class="skill-items">Microsoft Excel · Power BI (DAX, Power Query) · AutoCAD · GIS &amp; Remote Sensing · Google Earth Engine</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Domain</div>
+        <div class="skill-items">Drip Irrigation Design · BOQ/BOM Preparation · GGRC Subsidy Processing · Precision Agriculture</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Sales</div>
+        <div class="skill-items">Dealer Coordination · B2B Technical Sales · Client Relationship Management</div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Languages</div>
+        <div class="skill-items">Hindi (Full Professional) · English (Professional Working) · Gujarati (Native)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-head reveal">
+      <span class="idx">05</span>
+      <h2>Education</h2>
+    </div>
+    <div class="reveal">
+      <div class="edu-item">
+        <div>
+          <div class="edu-name">Bachelor of Technology, Agricultural Engineering</div>
+          <div class="edu-school">Anand Agricultural University · OGPA 7.174</div>
+        </div>
+        <div class="edu-date">2020 – 2024</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-name">Higher Secondary Certificate (Science)</div>
+          <div class="edu-school">P. Chandra Vidhya Vihar, Borsad</div>
+        </div>
+        <div class="edu-date">2018 – 2020</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="edu-name">Secondary School Certificate</div>
+          <div class="edu-school">Shree Bandhu Samaj High School, Sadhi</div>
+        </div>
+        <div class="edu-date">2016 – 2018</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-box reveal">
+      <h2>Let's talk</h2>
+      <p>Open to new opportunities and collaborations.</p>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="mailto:harshitpatel3102@gmail.com">harshitpatel3102@gmail.com</a>
+        <a class="btn btn-ghost" href="tel:+918140593242">+91 81405 93242</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="loc">Padra, Vadodara — 391445</div>
+  <div>© <span id="yr"></span> HARSHIT PATEL</div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
